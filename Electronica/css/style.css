@@ -1,0 +1,119 @@
+/* Estilo global */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #004d98, #f0f0f0);
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  color: #333;
+}
+
+header {
+  background-color: #002f6c;
+  color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px auto;
+  width: 80%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Integrantes */
+.integrantes {
+  margin: 20px auto;
+}
+
+.integrantes .cards {
+  display: flex;  /* Cambiado a flex */
+  justify-content: center;
+  gap: 30px;  /* Espaciado entre las fotos */
+  flex-wrap: wrap;  /* Permitir que se envuelvan en pantallas pequeñas */
+}
+
+.foto {
+  text-align: center; /* Alinear el texto debajo de la imagen */
+}
+
+.foto img {
+  width: 100px;   /* Ancho de las fotos */
+  height: 100px;  /* Alto de las fotos */
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.foto img:hover {
+  transform: rotate(10deg);
+}
+
+.foto p {
+  margin-top: 10px;  /* Espacio entre la imagen y el texto */
+  font-weight: bold;
+}
+
+/* Escudo */
+.escudo {
+  margin: 20px auto;
+}
+
+.escudo img {
+  width: 150px;
+  transition: transform 0.3s ease;
+}
+
+.escudo img:hover {
+  transform: scale(1.2);
+}
+
+/* Botones */
+.buttons {
+  margin: 20px 0; /* Espacio entre la sección de botones */
+}
+
+button {
+  margin: 10px;
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #004d98;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #002f6c;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 1s ease-in-out;
+}

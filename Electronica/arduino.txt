@@ -1,0 +1,81 @@
+#include <SPI.h>
+#include <Ethernet.h>
+#include <ArduinoJson.h>
+
+// Definiciones de la red
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Cambia esto a la dirección MAC de tu dispositivo
+IPAddress ip(192, 168, 1, 177); // Cambia esto a la dirección IP de tu dispositivo
+IPAddress apiServer(192, 168, 1, 100); // Cambia esto a la dirección IP de tu servidor API
+
+EthernetClient client;
+
+// Datos del sensor
+float temperatura = 25.0;
+float humedad = 50.0;
+float distancia = 10.0;
+
+void setup() {
+    Serial.begin(9600);
+    Ethernet.begin(mac, ip);
+    Serial.println("Conectando a la red...");
+
+    // Esperar a que se conecte
+    while (Ethernet.linkStatus() == LinkOFF) {
+        delay(1000);
+        Serial.println("Conectando...");
+    }
+    
+    Serial.println("Conexión exitosa");
+    enviarDatos();
+}
+
+void loop() {
+    // Cada 10 segundos, enviar datos y recibir respuesta
+    delay(10000);
+    enviarDatos();
+    recibirDatos();
+}
+
+void enviarDatos() {
+    if (client.connect(apiServer, 80)) {
+        Serial.println("Conectado al servidor API");
+
+        // Crear un objeto JSON
+        StaticJsonDocument<200> jsonDoc;
+        jsonDoc["Temperatura"] = temperatura;
+        jsonDoc["Humedad"] = humedad;
+        jsonDoc["Distancia"] = distancia;
+        jsonDoc["Mensaje"] = "Datos del sensor";
+        
+        // Serializar el objeto JSON
+        String jsonString;
+        serializeJson(jsonDoc, jsonString);
+
+        // Enviar la solicitud HTTP POST
+        client.println("POST /data HTTP/1.1");
+        client.println("Host: " + String(apiServer));
+        client.println("Content-Type: application/json");
+        client.print("Content-Length: ");
+        client.println(jsonString.length());
+        client.println();
+        client.println(jsonString);
+
+        Serial.println("Datos enviados: " + jsonString);
+    } else {
+        Serial.println("Fallo en la conexión al servidor API");
+    }
+}
+
+void recibirDatos() {
+    // Esperar la respuesta del servidor
+    if (client.available()) {
+        String response = client.readStringUntil('\r');
+        Serial.println("Respuesta del servidor:");
+        Serial.println(response);
+    } else {
+        Serial.println("No hay datos disponibles");
+    }
+    
+    // Cerrar la conexión
+    client.stop();
+}

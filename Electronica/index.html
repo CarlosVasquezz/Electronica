@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitor de Sensores y Equipo</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1>Monitor de Sensores y Equipo</h1>
+  </header>
+
+  <main>
+    <section class="card sensor-container">
+      <h2>Datos del Sensor</h2>
+      <p>🌡️ Temperatura: <span id="temp">--</span> °C</p>
+      <p>📏 Distancia: <span id="distance">--</span> cm</p>
+      <p id="api-status">Estado de la API: Cargando...</p> <!-- Nuevo elemento para mostrar el estado de la API -->
+    </section>
+
+
+    <section class="integrantes">
+        <h2>Integrantes del Proyecto</h2>
+        <div class="cards">
+          <div class="foto">
+            <img src="img/user.png" alt="Foto 1">
+            <p>Tatiana</p>
+            <p>QG232367</p>
+          </div>
+          <div class="foto">
+            <img src="img/montoya.jpg" alt="Foto 2">
+            <p>Montoya</p>
+            <p>MM181797</p>
+          </div>
+          <div class="foto">
+            <img src="img/vasquez.png" alt="Foto 3">
+            <p>Carlos</p>
+            <p>VP232418</p>
+          </div>
+        </div>
+      </section>
+      
+
+    <section class="card escudo">
+      <h2>Escudo del Barcelona</h2>
+      <img src="/img/logo.png" alt="Escudo del Barcelona">
+    </section>
+
+    <div class="buttons">
+      <button onclick="enviarMensaje('Todas mienten')">Enviar "Todas mienten"</button>
+      <button onclick="enviarMensaje('Todos son iguales')">Enviar "Todos son iguales"</button>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
